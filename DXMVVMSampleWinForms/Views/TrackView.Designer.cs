@@ -79,13 +79,6 @@
 			// 
 			// mvvmContext1
 			// 
-			this.mvvmContext1.BindingExpressions.AddRange(new DevExpress.Utils.MVVM.BindingExpression[] {
-            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackViewModel), "AlbumLookupData", this.repositoryItemLookUpEdit1, "DataSource"),
-            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackViewModel), "Name", this.txtComposer, "EditValue"),
-            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackViewModel), "Composer", this.txtComposer, "EditValue"),
-            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackViewModel), "Milliseconds", this.spnLength, "EditValue"),
-            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackViewModel), "Bytes", this.spnBytes, "EditValue"),
-            DevExpress.Utils.MVVM.BindingExpression.CreateCommandBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackViewModel), "ResetName", this.btnClear)});
 			this.mvvmContext1.ContainerControl = this;
 			this.mvvmContext1.RegistrationExpressions.AddRange(new DevExpress.Utils.MVVM.RegistrationExpression[] {
             DevExpress.Utils.MVVM.RegistrationExpression.RegisterMessageBoxService(null, false, DevExpress.Utils.MVVM.Services.DefaultMessageBoxServiceType.Default)});
@@ -119,6 +112,10 @@
 			this.cbxAlbum.Location = new System.Drawing.Point(63, 36);
 			this.cbxAlbum.MenuManager = this.barManager1;
 			this.cbxAlbum.Name = "cbxAlbum";
+			this.cbxAlbum.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", 200, "Album")});
+			this.cbxAlbum.Properties.DisplayMember = "Value";
+			this.cbxAlbum.Properties.ValueMember = "Key";
 			this.cbxAlbum.Size = new System.Drawing.Size(530, 20);
 			this.cbxAlbum.StyleController = this.layoutControl2;
 			this.cbxAlbum.TabIndex = 9;

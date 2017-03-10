@@ -4,6 +4,7 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace DXMVVMSampleWPF.ViewModels
 {
@@ -14,7 +15,10 @@ namespace DXMVVMSampleWPF.ViewModels
 		{
 		}
 		protected TrackViewModel(int? trackId, string name, int? albumId, int mediaTypeId, int? genreId,
-											string composer, int milliSeconds, int? bytes)
+											string composer, int milliSeconds, int? bytes,
+											IList<LookupItem> albumLookupData,
+											IList<LookupItem> mediaLookupData,
+											IList<LookupItem> genreLookupData)
 		{
 			this.TrackId = trackId;
 			this.Name = name;
@@ -24,6 +28,13 @@ namespace DXMVVMSampleWPF.ViewModels
 			this.Composer = composer;
 			this.Milliseconds = milliSeconds;
 			this.Bytes = bytes;
+
+			//calculated fields here
+
+			//lookup data here
+			this.AlbumLookupData = albumLookupData;
+			this.MediaLookupData = mediaLookupData;
+			this.GenreLookupData = genreLookupData;
 		}
 
 		public static TrackViewModel Create()
@@ -31,13 +42,19 @@ namespace DXMVVMSampleWPF.ViewModels
 			var t = new TrackList()[15];
 
 			return ViewModelSource.Create(() => new TrackViewModel(t.TrackId, t.Name, t.AlbumId, t.MediaTypeId, t.GenreId,
-											t.Composer, t.Milliseconds, t.Bytes));
+											t.Composer, t.Milliseconds, t.Bytes, null, null, null));
 		}
 
-		public static TrackViewModel Create(int? trackId, string name, int? albumId, int mediaTypeId, int? genreId,
-											string composer, int milliSeconds, int? bytes)
+		public static TrackViewModel Create(int? trackId, string name, int? albumId,
+											int mediaTypeId, int? genreId,
+											string composer, int milliSeconds, int? bytes,
+											IList<LookupItem> albumLookupData,
+											IList<LookupItem> mediaLookupData,
+											IList<LookupItem> genreLookupData)
 		{
-			return ViewModelSource.Create(() => new TrackViewModel(trackId, name, albumId, mediaTypeId, genreId, composer, milliSeconds, bytes));
+			return ViewModelSource.Create(() => new TrackViewModel(trackId, name, albumId, mediaTypeId,
+				genreId, composer, milliSeconds, bytes,
+				albumLookupData, mediaLookupData, genreLookupData));
 		}
 		public bool CanResetName()
 		{
@@ -67,9 +84,14 @@ namespace DXMVVMSampleWPF.ViewModels
 		public virtual int Milliseconds { get; set; }
 		public virtual int? Bytes { get; set; }
 
+		public virtual IList<LookupItem> AlbumLookupData { get; protected set; }
+		public virtual IList<LookupItem> MediaLookupData { get; protected set; }
+		public virtual IList<LookupItem> GenreLookupData { get; protected set; }
+
 		public TrackViewModel Clone()
 		{
-			return TrackViewModel.Create(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes);
+			return TrackViewModel.Create(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes,
+											AlbumLookupData, MediaLookupData, GenreLookupData);
 		}
 
 		public void Assign(TrackViewModel source)
@@ -82,6 +104,10 @@ namespace DXMVVMSampleWPF.ViewModels
 			this.Composer = source.Composer;
 			this.Milliseconds = source.Milliseconds;
 			this.Bytes = source.Bytes;
+
+			this.AlbumLookupData = source.AlbumLookupData;
+			this.MediaLookupData = source.MediaLookupData;
+			this.GenreLookupData = source.GenreLookupData;
 		}
 	}
 }

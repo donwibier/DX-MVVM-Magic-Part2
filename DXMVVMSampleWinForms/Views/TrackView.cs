@@ -28,17 +28,15 @@ namespace DXMVVMSampleWinForms.Views
 		void InitBindings()
 		{
 			
-			
-			//var f = mvvmContext1.OfType<TrackViewModel>();			
+			var f = mvvmContext1.OfType<TrackViewModel>();			
 
-
-			//f.SetBinding(txtName, x => x.EditValue, x => x.Name);
-			//f.SetBinding(cbxAlbum, x => x.EditValue, x => x.AlbumId);
-			//f.SetBinding(cbxAlbum, x => x.Properties.DataSource, x => x.AlbumLookupData);
-			//f.SetBinding(txtComposer, x => x.EditValue, x => x.Composer);
-			//f.SetBinding(spnLength, x => x.EditValue, x => x.Milliseconds);
-			//f.SetBinding(spnBytes, x => x.EditValue, x => x.Bytes);
-			//f.BindCommand(btnClear, x => x.ResetName());
+			f.SetBinding(txtName, x => x.EditValue, x => x.Name);
+			f.SetBinding(cbxAlbum, x => x.EditValue, x => x.AlbumId);
+			f.SetBinding(cbxAlbum.Properties, x => x.DataSource, x => x.AlbumLookupData);
+			f.SetBinding(txtComposer, x => x.EditValue, x => x.Composer);
+			f.SetBinding(spnLength, x => x.EditValue, x => x.Milliseconds);
+			f.SetBinding(spnBytes, x => x.EditValue, x => x.Bytes);
+			f.BindCommand(btnClear, x => x.ResetName());
 		}
 	}
 }
