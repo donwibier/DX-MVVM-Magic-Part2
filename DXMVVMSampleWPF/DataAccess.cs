@@ -124,6 +124,26 @@ namespace DXMVVMSampleWPF
 			}
 
 		}
+		public static IEnumerable<AlbumViewModel> GetAlbumViewModelList()
+		{
+			using (var ctx = new ChinookContext())
+			{
+				foreach (var album in ctx.Album)
+					yield return AlbumViewModel.Create(album.ArtistId, album.Title);
+			}
+		}
+		public static void PersistAlbum(AlbumViewModel album)
+		{
+			using (var ctx = new ChinookContext())
+			{
+				Album pAlbum = album.AlbumId.HasValue ?
+					ctx.Album.First(t => t.AlbumId == album.AlbumId) :
+					new Album();
+
+				pAlbum.Title = album.Name;
+				ctx.SaveChanges();
+			}
+		}
 
 	}
 }
