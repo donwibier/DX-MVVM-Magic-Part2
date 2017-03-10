@@ -56,8 +56,13 @@ namespace DXMVVMSampleWinForms.ViewModels
 
 			return Task.Factory.StartNew((state) =>
 			{
-				Tracks = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList());
-				IsLoading = false;
+				var results = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList());
+				// Update on UI Thread
+				((IDispatcherService)state).BeginInvoke(() => {
+					Tracks = results;		  
+					IsLoading = false;
+				});
+				
 			}, DispatcherService);
 		}
 	}

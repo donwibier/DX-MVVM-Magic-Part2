@@ -15,9 +15,9 @@ namespace DXMVVMSampleWinForms.ViewModels
 		}
 		protected TrackViewModel(int? trackId, string name, int? albumId, int mediaTypeId, int? genreId,
 											string composer, int milliSeconds, int? bytes,
-											IList<LookupItem> albumLookupData,
-											IList<LookupItem> mediaLookupData,
-											IList<LookupItem> genreLookupData)
+											IList<LookupItem> albumLookupData = null,
+											IList<LookupItem> mediaLookupData = null,
+											IList<LookupItem> genreLookupData = null)
 		{
 			this.TrackId = trackId;
 			this.Name = name;
@@ -44,14 +44,14 @@ namespace DXMVVMSampleWinForms.ViewModels
 											t.Composer, t.Milliseconds, t.Bytes, null, null, null));
 		}
 
-		public static TrackViewModel Create(int? trackId, string name, int? albumId, 
+		public static TrackViewModel Create(int? trackId, string name, int? albumId,
 											int mediaTypeId, int? genreId,
-											string composer, int milliSeconds, int? bytes, 
-											IList<LookupItem> albumLookupData,
-											IList<LookupItem> mediaLookupData,
-											IList<LookupItem> genreLookupData)
+											string composer, int milliSeconds, int? bytes,
+											IList<LookupItem> albumLookupData = null,
+											IList<LookupItem> mediaLookupData = null,
+											IList<LookupItem> genreLookupData = null)
 		{
-			return ViewModelSource.Create(() => new TrackViewModel(trackId, name, albumId, mediaTypeId, 
+			return ViewModelSource.Create(() => new TrackViewModel(trackId, name, albumId, mediaTypeId,
 				genreId, composer, milliSeconds, bytes,
 				albumLookupData, mediaLookupData, genreLookupData));
 		}
@@ -89,8 +89,8 @@ namespace DXMVVMSampleWinForms.ViewModels
 
 		public TrackViewModel Clone()
 		{
-			return TrackViewModel.Create(TrackId, Name, AlbumId, MediaTypeId, GenreId, 
-				Composer, Milliseconds, Bytes, 
+			return TrackViewModel.Create(TrackId, Name, AlbumId, MediaTypeId, GenreId,
+				Composer, Milliseconds, Bytes,
 				AlbumLookupData, MediaLookupData, GenreLookupData);
 		}
 

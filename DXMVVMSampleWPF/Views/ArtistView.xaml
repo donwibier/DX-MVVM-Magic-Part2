@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="DXMVVMSampleWPF.Views.ArtistView"
+xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
+			 xmlns:ViewModels="clr-namespace:DXMVVMSampleWPF.ViewModels"
+             mc:Ignorable="d"
+             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ArtistViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+	<dxmvvm:Interaction.Behaviors>
+		<dx:DXMessageBoxService/>
+		<dxmvvm:CurrentWindowService/>
+	</dxmvvm:Interaction.Behaviors>
+	<StackPanel>
+		<dxb:ToolBarControl>
+			<dxb:BarButtonItem Content="Clear Name" Command="{Binding ResetNameCommand}"/>
+		</dxb:ToolBarControl>
+
+		<dxlc:LayoutControl>
+			<dxlc:LayoutGroup View="Group">
+				<dxlc:LayoutGroup Orientation="Vertical">
+					<dxlc:LayoutItem Label="Name">
+						<dxe:TextEdit Text="{Binding Name}"/>
+					</dxlc:LayoutItem>
+				</dxlc:LayoutGroup>
+			</dxlc:LayoutGroup>
+		</dxlc:LayoutControl>
+	</StackPanel>
+</UserControl>

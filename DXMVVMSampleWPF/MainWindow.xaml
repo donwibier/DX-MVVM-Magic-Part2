@@ -6,6 +6,8 @@
         xmlns:Views="clr-namespace:DXMVVMSampleWPF.Views" x:Class="DXMVVMSampleWPF.MainWindow"
         Title="MainWindow" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 	<Grid>
-		<Views:TrackListView />
+		<!--<Views:TrackListView />-->
+		<!--<Views:ArtistListView></Views:ArtistListView>-->
+		<Views:MainView></Views:MainView>
 	</Grid>
 </dx:DXWindow>

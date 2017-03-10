@@ -1,38 +1,39 @@
-﻿using DevExpress.Mvvm.DataAnnotations;
+﻿using System;
+using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm;
-using DevExpress.Mvvm.POCO;
 using System.Collections.ObjectModel;
+using DevExpress.Mvvm.POCO;
 using System.Threading.Tasks;
 
 namespace DXMVVMSampleWPF.ViewModels
 {
 	[POCOViewModel]
-	public class TrackListViewModel
+	public class ArtistListViewModel
 	{
-		public virtual ObservableCollection<TrackViewModel> Tracks
+		public virtual ObservableCollection<ArtistViewModel> Artists
 		{
 			get;
 			/* We only want to set this through the ViewModel code */
 			protected set;
 		}
 		//CurrentTrack is only needed for Winforms app since the WinForms Grid doesn't have a RowDblClick event
-		public virtual TrackViewModel CurrentTrack { get; set; }
+		public virtual ArtistViewModel CurrentTrack { get; set; }
 		public virtual bool IsLoading
 		{
 			get;
 			protected set;
 		}
 
-		protected TrackListViewModel()
+		protected ArtistListViewModel()
 		{
 			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () => {
-					ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Tracks);
+					ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Artists);
 				});
 		}
 
-		public static TrackListViewModel Create()
+		public static ArtistListViewModel Create()
 		{
-			return ViewModelSource.Create(() => new TrackListViewModel());
+			return ViewModelSource.Create(() => new ArtistListViewModel());
 		}
 
 		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
@@ -41,14 +42,14 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
 
 
-		public void EditTrack(TrackViewModel track)
+		public void EditTrack(ArtistViewModel artist)
 		{
-			var trackClone = track.Clone();
+			var trackClone = artist.Clone();
 			if (DialogService.ShowDialog(
-				MessageButton.OKCancel, "Edit Track", "TrackView", trackClone) == MessageResult.OK)
+				MessageButton.OKCancel, "Edit Artist", "ArtistView", trackClone) == MessageResult.OK)
 			{
-				track.Assign(trackClone);
-				DataAccess.PersistTrack(track);
+				artist.Assign(trackClone);
+				DataAccess.PersistArtist(artist);
 			}
 		}
 
@@ -58,10 +59,10 @@ namespace DXMVVMSampleWPF.ViewModels
 
 			return Task.Factory.StartNew((state) =>
 			{
-				var results = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList());
+				var results = new ObservableCollection<ArtistViewModel>(DataAccess.GetArtistViewModelList());
 				// Update on UI Thread
 				((IDispatcherService)state).BeginInvoke(() => {
-					Tracks = results;
+					Artists = results;
 					IsLoading = false;
 				});
 

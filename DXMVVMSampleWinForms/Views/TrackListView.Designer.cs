@@ -32,6 +32,14 @@
 			this.mvvmContext1 = new DevExpress.Utils.MVVM.MVVMContext(this.components);
 			this.gridControl1 = new DevExpress.XtraGrid.GridControl();
 			this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+			this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnAlbum = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnMediaType = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnGenre = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnComposer = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnMilliseconds = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnBytes = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.mvvmContext1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -57,9 +65,82 @@
 			// 
 			// gridView1
 			// 
+			this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnId,
+            this.gridColumnName,
+            this.gridColumnAlbum,
+            this.gridColumnMediaType,
+            this.gridColumnGenre,
+            this.gridColumnComposer,
+            this.gridColumnMilliseconds,
+            this.gridColumnBytes});
 			this.gridView1.GridControl = this.gridControl1;
 			this.gridView1.Name = "gridView1";
 			this.gridView1.OptionsBehavior.Editable = false;
+			// 
+			// gridColumnId
+			// 
+			this.gridColumnId.Caption = "Track Id";
+			this.gridColumnId.FieldName = "TrackId";
+			this.gridColumnId.Name = "gridColumnId";
+			this.gridColumnId.Visible = true;
+			this.gridColumnId.VisibleIndex = 0;
+			// 
+			// gridColumnName
+			// 
+			this.gridColumnName.Caption = "Name";
+			this.gridColumnName.FieldName = "Name";
+			this.gridColumnName.Name = "gridColumnName";
+			this.gridColumnName.Visible = true;
+			this.gridColumnName.VisibleIndex = 1;
+			// 
+			// gridColumnAlbum
+			// 
+			this.gridColumnAlbum.Caption = "Album";
+			this.gridColumnAlbum.FieldName = "AlbumId";
+			this.gridColumnAlbum.Name = "gridColumnAlbum";
+			this.gridColumnAlbum.Visible = true;
+			this.gridColumnAlbum.VisibleIndex = 2;
+			// 
+			// gridColumnMediaType
+			// 
+			this.gridColumnMediaType.Caption = "Media type";
+			this.gridColumnMediaType.FieldName = "MediaTypeId";
+			this.gridColumnMediaType.Name = "gridColumnMediaType";
+			this.gridColumnMediaType.Visible = true;
+			this.gridColumnMediaType.VisibleIndex = 3;
+			// 
+			// gridColumnGenre
+			// 
+			this.gridColumnGenre.Caption = "Genre";
+			this.gridColumnGenre.FieldName = "GenreId";
+			this.gridColumnGenre.Name = "gridColumnGenre";
+			this.gridColumnGenre.Visible = true;
+			this.gridColumnGenre.VisibleIndex = 4;
+			// 
+			// gridColumnComposer
+			// 
+			this.gridColumnComposer.Caption = "Composer";
+			this.gridColumnComposer.FieldName = "Composer";
+			this.gridColumnComposer.Name = "gridColumnComposer";
+			this.gridColumnComposer.Visible = true;
+			this.gridColumnComposer.VisibleIndex = 5;
+			// 
+			// gridColumnMilliseconds
+			// 
+			this.gridColumnMilliseconds.Caption = "Milliseconds";
+			this.gridColumnMilliseconds.FieldName = "Milliseconds";
+			this.gridColumnMilliseconds.Name = "gridColumnMilliseconds";
+			this.gridColumnMilliseconds.Visible = true;
+			this.gridColumnMilliseconds.VisibleIndex = 6;
+			// 
+			// gridColumnBytes
+			// 
+			this.gridColumnBytes.Caption = "Bytes";
+			this.gridColumnBytes.FieldName = "Bytes";
+			this.gridColumnBytes.Name = "gridColumnBytes";
+			this.gridColumnBytes.Visible = true;
+			this.gridColumnBytes.VisibleIndex = 7;
 			// 
 			// TrackListView
 			// 
@@ -79,5 +160,13 @@
 		private DevExpress.Utils.MVVM.MVVMContext mvvmContext1;
 		private DevExpress.XtraGrid.GridControl gridControl1;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnName;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnAlbum;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnMediaType;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnGenre;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnComposer;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnMilliseconds;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnBytes;
 	}
 }

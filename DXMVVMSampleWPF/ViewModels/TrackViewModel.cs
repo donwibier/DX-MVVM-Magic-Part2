@@ -16,9 +16,9 @@ namespace DXMVVMSampleWPF.ViewModels
 		}
 		protected TrackViewModel(int? trackId, string name, int? albumId, int mediaTypeId, int? genreId,
 											string composer, int milliSeconds, int? bytes,
-											IList<LookupItem> albumLookupData,
-											IList<LookupItem> mediaLookupData,
-											IList<LookupItem> genreLookupData)
+											IList<LookupItem> albumLookupData = null,
+											IList<LookupItem> mediaLookupData = null,
+											IList<LookupItem> genreLookupData = null)
 		{
 			this.TrackId = trackId;
 			this.Name = name;
@@ -48,9 +48,9 @@ namespace DXMVVMSampleWPF.ViewModels
 		public static TrackViewModel Create(int? trackId, string name, int? albumId,
 											int mediaTypeId, int? genreId,
 											string composer, int milliSeconds, int? bytes,
-											IList<LookupItem> albumLookupData,
-											IList<LookupItem> mediaLookupData,
-											IList<LookupItem> genreLookupData)
+											IList<LookupItem> albumLookupData = null,
+											IList<LookupItem> mediaLookupData = null,
+											IList<LookupItem> genreLookupData = null)
 		{
 			return ViewModelSource.Create(() => new TrackViewModel(trackId, name, albumId, mediaTypeId,
 				genreId, composer, milliSeconds, bytes,

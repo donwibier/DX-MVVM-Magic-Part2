@@ -12,6 +12,17 @@ namespace DXMVVMSampleWPF
 		public int Key { get; set; }
 		public string Value { get; set; }
 	}
+	public enum NavigationKey
+	{
+		Tracks,
+		Artists
+	}
+	public static class Regions
+	{
+		public static string Navigation { get { return "NavigationRegion"; } }
+		public static string Content { get { return "ContentRegion"; } }
+	}
+
 	public class DataAccess
 	{
 
@@ -48,7 +59,7 @@ namespace DXMVVMSampleWPF
 		//	if (!track.TrackId.HasValue)
 		//		data.Add(pTrack);
 		//}
-		
+
 		public static IEnumerable<TrackViewModel> GetTrackViewModelList()
 		{
 			using (var ctx = new ChinookContext())
@@ -91,6 +102,27 @@ namespace DXMVVMSampleWPF
 				pTrack.Bytes = track.Bytes;
 				ctx.SaveChanges();
 			}
+		}
+		public static IEnumerable<ArtistViewModel> GetArtistViewModelList()
+		{
+			using (var ctx = new ChinookContext())
+			{
+				foreach (var artist in ctx.Artist)
+					yield return ArtistViewModel.Create(artist.ArtistId, artist.Name);
+			}
+		}
+		public static void PersistArtist(ArtistViewModel artist)
+		{
+			using (var ctx = new ChinookContext())
+			{
+				Artist pArtist = artist.ArtistId.HasValue ?
+					ctx.Artist.First(t => t.ArtistId == artist.ArtistId) :
+					new Artist();
+
+				pArtist.Name = artist.Name;
+				ctx.SaveChanges();
+			}
+
 		}
 
 	}
