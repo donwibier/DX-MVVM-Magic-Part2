@@ -1,0 +1,40 @@
+﻿<UserControl
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+			 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:ViewModels="clr-namespace:DXMVVMSampleWPF.ViewModels"
+			 xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="DXMVVMSampleWPF.Views.TrackListView"
+			 mc:Ignorable="d"
+			 DataContext="{dxmvvm:ViewModelSource Type={x:Type ViewModels:TrackListViewModel}}"
+			 d:DesignHeight="300" d:DesignWidth="300">
+	<dxmvvm:Interaction.Behaviors>
+		<dxmvvm:DispatcherService/>
+		<dxmvvm:EventToCommand Command="{Binding LoadTracksCommand}" Event="Loaded"></dxmvvm:EventToCommand>
+		<dx:DialogService DialogWindowStartupLocation="CenterOwner">
+			<dx:DialogService.DialogStyle>
+				<Style TargetType="dx:DXDialogWindow">
+					<Setter Property="Width" Value="450"/>
+					<Setter Property="Height" Value="300"/>
+				</Style>
+			</dx:DialogService.DialogStyle>
+		</dx:DialogService>
+	</dxmvvm:Interaction.Behaviors>
+	<Grid>
+		<dxg:GridControl x:Name="grid" AutoGenerateColumns="AddNew" 
+						 EnableSmartColumnsGeneration="True" 
+						 ItemsSource="{Binding Tracks}"
+						 ShowLoadingPanel="{Binding IsLoading}">
+			<dxg:GridControl.View>
+				<dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False">
+					<dxmvvm:Interaction.Behaviors>
+						<dxmvvm:EventToCommand EventName="RowDoubleClick" Command="{Binding EditTrackCommand}" 
+											   CommandParameter="{Binding CurrentItem, ElementName=grid}"/>
+					</dxmvvm:Interaction.Behaviors>
+					
+				</dxg:TableView>
+			</dxg:GridControl.View>
+		</dxg:GridControl>
+	</Grid>
+</UserControl>
