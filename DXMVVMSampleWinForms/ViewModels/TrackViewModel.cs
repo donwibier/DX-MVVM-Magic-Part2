@@ -89,9 +89,8 @@ namespace DXMVVMSampleWinForms.ViewModels
 
 		public TrackViewModel Clone()
 		{
-			return TrackViewModel.Create(TrackId, Name, AlbumId, MediaTypeId, GenreId,
-				Composer, Milliseconds, Bytes,
-				AlbumLookupData, MediaLookupData, GenreLookupData);
+			return TrackViewModel.Create(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes,
+											AlbumLookupData, MediaLookupData, GenreLookupData);
 		}
 
 		public void Assign(TrackViewModel source)
@@ -109,5 +108,6 @@ namespace DXMVVMSampleWinForms.ViewModels
 			this.MediaLookupData = source.MediaLookupData;
 			this.GenreLookupData = source.GenreLookupData;
 		}
+
 	}
 }

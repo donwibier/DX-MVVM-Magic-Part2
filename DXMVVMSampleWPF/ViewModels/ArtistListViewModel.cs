@@ -10,14 +10,14 @@ namespace DXMVVMSampleWPF.ViewModels
 	[POCOViewModel]
 	public class ArtistListViewModel
 	{
-		public virtual ObservableCollection<ArtistViewModel> Artists
+		public virtual ObservableCollection<ArtistViewModel> Items
 		{
 			get;
 			/* We only want to set this through the ViewModel code */
 			protected set;
 		}
 		//CurrentTrack is only needed for Winforms app since the WinForms Grid doesn't have a RowDblClick event
-		public virtual ArtistViewModel CurrentTrack { get; set; }
+		public virtual ArtistViewModel CurrentItem { get; set; }
 		public virtual bool IsLoading
 		{
 			get;
@@ -42,14 +42,14 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
 
 
-		public void EditTrack(ArtistViewModel artist)
+		public void EditItem(ArtistViewModel item)
 		{
-			var trackClone = artist.Clone();
+			var editItem = item.Clone();
 			if (DialogService.ShowDialog(
-				MessageButton.OKCancel, "Edit Artist", "ArtistView", trackClone) == MessageResult.OK)
+				MessageButton.OKCancel, "Edit Artist", "ArtistView", editItem) == MessageResult.OK)
 			{
-				artist.Assign(trackClone);
-				DataAccess.PersistArtist(artist);
+				item.Assign(editItem);
+				DataAccess.PersistArtist(item);
 			}
 		}
 
@@ -62,7 +62,7 @@ namespace DXMVVMSampleWPF.ViewModels
 				var results = new ObservableCollection<ArtistViewModel>(DataAccess.GetArtistViewModelList());
 				// Update on UI Thread
 				((IDispatcherService)state).BeginInvoke(() => {
-					Artists = results;
+					Items = results;
 					IsLoading = false;
 				});
 

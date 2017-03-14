@@ -36,13 +36,13 @@ namespace DXMVVMSampleWinForms.Views
 			mvvm.WithEvent<EventArgs>(this, "Load").EventToCommand(x => x.LoadTracks());	
 					
 			mvvm.WithEvent<ColumnView, FocusedRowObjectChangedEventArgs>(gridView1, "FocusedRowObjectChanged")
-				.SetBinding(x => x.CurrentTrack,
+				.SetBinding(x => x.CurrentItem,
 					args => args.Row as TrackViewModel,
 					(gView, track) => gView.FocusedRowHandle = gView.FindRow(track));
 
 			mvvm.WithEvent<RowClickEventArgs>(gridView1, "RowClick")
 			   .EventToCommand(
-				   x => x.EditTrack(null), x => x.CurrentTrack,
+				   x => x.EditItem(null), x => x.CurrentItem,
 				   args => (args.Clicks == 2) && (args.Button == MouseButtons.Left));
 		}
 	}

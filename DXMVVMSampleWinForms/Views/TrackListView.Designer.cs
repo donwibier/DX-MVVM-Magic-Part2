@@ -48,7 +48,7 @@
 			// mvvmContext1
 			// 
 			this.mvvmContext1.BindingExpressions.AddRange(new DevExpress.Utils.MVVM.BindingExpression[] {
-            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackListViewModel), "Tracks", this.gridControl1, "DataSource")});
+            DevExpress.Utils.MVVM.BindingExpression.CreatePropertyBinding(typeof(DXMVVMSampleWinForms.ViewModels.TrackListViewModel), "Items", this.gridControl1, "DataSource")});
 			this.mvvmContext1.ContainerControl = this;
 			this.mvvmContext1.ViewModelType = typeof(DXMVVMSampleWinForms.ViewModels.TrackListViewModel);
 			// 

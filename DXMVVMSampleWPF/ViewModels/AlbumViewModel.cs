@@ -3,6 +3,7 @@ using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 
 namespace DXMVVMSampleWPF.ViewModels
 {
@@ -12,10 +13,11 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected AlbumViewModel()
 		{
 		}
-		protected AlbumViewModel(int? albumId, string name)
+		protected AlbumViewModel(int? albumId, string name, int trackcount)
 		{
 			this.AlbumId = albumId;
 			this.Name = name;
+			this.TrackCount = trackcount;
 
 			//calculated fields here
 
@@ -26,12 +28,12 @@ namespace DXMVVMSampleWPF.ViewModels
 		{
 			var t = new TrackList()[15];
 
-			return ViewModelSource.Create(() => new AlbumViewModel(-1, "Don Wibier"));
+			return ViewModelSource.Create(() => new AlbumViewModel(-1, "Don Wibier", 0));
 		}
 
-		public static AlbumViewModel Create(int? albumId, string name)
+		public static AlbumViewModel Create(int? albumId, string name, int trackcount)
 		{
-			return ViewModelSource.Create(() => new AlbumViewModel(albumId, name));
+			return ViewModelSource.Create(() => new AlbumViewModel(albumId, name, trackcount));
 		}
 		public bool CanResetName()
 		{
@@ -55,15 +57,33 @@ namespace DXMVVMSampleWPF.ViewModels
 		public int? AlbumId { get; set; }
 		public virtual string Name { get; set; }
 
+		public virtual int TrackCount { get; set; }
+
+		private ObservableCollection<TrackViewModel> _Items = null;
+		public virtual ObservableCollection<TrackViewModel> Items
+		{
+			get
+			{
+				if (_Items == null)
+				{
+					_Items = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList(this.AlbumId ?? 0));
+				}
+				return _Items;
+			}
+			set { _Items = value; }
+		}
+
 		public AlbumViewModel Clone()
 		{
-			return AlbumViewModel.Create(AlbumId, Name);
+			return AlbumViewModel.Create(AlbumId, Name, TrackCount);
 		}
 
 		public void Assign(AlbumViewModel source)
 		{
 			this.AlbumId = source.AlbumId;
 			this.Name = source.Name;
+			this.TrackCount = source.TrackCount;
+			this.Items = source.Items;
 		}
 	}
 }

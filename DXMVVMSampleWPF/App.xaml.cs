@@ -28,6 +28,10 @@ namespace DXMVVMSampleWPF
 				NavigationKey.Tracks,
 				() => TrackListViewModel.Create(),
 				typeof(TrackListView));
+			ViewInjectionManager.Default.Inject(Regions.Navigation,
+				NavigationKey.Tracks,
+				() => NavigationItemViewModel.Create("Tracks", NavigationKey.Tracks),
+				typeof(NavigationItemView));
 
 			ViewInjectionManager.Default.Inject(Regions.Content,
 				NavigationKey.Artists,
@@ -35,12 +39,18 @@ namespace DXMVVMSampleWPF
 				typeof(ArtistListView));
 
 			ViewInjectionManager.Default.Inject(Regions.Navigation,
-				NavigationKey.Tracks,
-				() => NavigationItemViewModel.Create("Tracks", NavigationKey.Tracks),
-				typeof(NavigationItemView));
-			ViewInjectionManager.Default.Inject(Regions.Navigation,
 				NavigationKey.Artists,
 				() => NavigationItemViewModel.Create("Artists", NavigationKey.Artists),
+				typeof(NavigationItemView));
+
+			ViewInjectionManager.Default.Inject(Regions.Content,
+				NavigationKey.Albums,
+				() => AlbumTreeViewModel.Create(),
+				typeof(AlbumTreeView));
+
+			ViewInjectionManager.Default.Inject(Regions.Navigation,
+				NavigationKey.Albums,
+				() => NavigationItemViewModel.Create("AlbumTree", NavigationKey.Albums),
 				typeof(NavigationItemView));
 
 			ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Tracks);

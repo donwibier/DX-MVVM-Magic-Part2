@@ -1,5 +1,7 @@
-﻿using DXMVVMSampleWPF.ViewModels;
+﻿using DevExpress.Xpf.Grid;
+using DXMVVMSampleWPF.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +17,8 @@ namespace DXMVVMSampleWPF
 	public enum NavigationKey
 	{
 		Tracks,
-		Artists
+		Artists,
+		Albums
 	}
 	public static class Regions
 	{
@@ -86,6 +89,33 @@ namespace DXMVVMSampleWPF
 			}
 		}
 
+		public static IEnumerable<TrackViewModel> GetTrackViewModelList(int albumid)
+		{
+			using (var ctx = new ChinookContext())
+			{
+				var albumLookupData = (from album in ctx.Album
+									   select new LookupItem { Key = album.AlbumId, Value = album.Title }).ToList();
+				var mediaLookupData = (from media in ctx.MediaType
+									   select new LookupItem() { Key = media.MediaTypeId, Value = media.Name }).ToList();
+				var genreLookupData = (from genre in ctx.Genre
+									   select new LookupItem { Key = genre.GenreId, Value = genre.Name }).ToList();
+
+				foreach (var track in ctx.Track.Where(x => x.AlbumId == albumid))
+					yield return TrackViewModel.Create(track.TrackId,
+										 track.Name,
+										 track.AlbumId,
+										 track.MediaTypeId,
+										 track.GenreId,
+										 track.Composer,
+										 track.Milliseconds,
+										 track.Bytes,
+										 albumLookupData,
+										 mediaLookupData,
+										 genreLookupData);
+			}
+		}
+
+
 		public static void PersistTrack(TrackViewModel track)
 		{
 			using (var ctx = new ChinookContext())
@@ -129,7 +159,7 @@ namespace DXMVVMSampleWPF
 			using (var ctx = new ChinookContext())
 			{
 				foreach (var album in ctx.Album)
-					yield return AlbumViewModel.Create(album.ArtistId, album.Title);
+					yield return AlbumViewModel.Create(album.ArtistId, album.Title, album.Track.Count());
 			}
 		}
 		public static void PersistAlbum(AlbumViewModel album)
@@ -145,5 +175,15 @@ namespace DXMVVMSampleWPF
 			}
 		}
 
+	}
+
+	public class CustomChildrenSelector : IChildNodesSelector
+	{
+		public IEnumerable SelectChildren(object item)
+		{
+			if (item is AlbumViewModel)
+				return (item as AlbumViewModel).Items;
+			return null;
+		}
 	}
 }

@@ -10,14 +10,14 @@ namespace DXMVVMSampleWPF.ViewModels
 	[POCOViewModel]
 	public class AlbumTreeViewModel
 	{
-		public virtual ObservableCollection<AlbumViewModel> Albums
+		public virtual ObservableCollection<AlbumViewModel> Items
 		{
 			get;
 			/* We only want to set this through the ViewModel code */
 			protected set;
 		}
 		//CurrentTrack is only needed for Winforms app since the WinForms Grid doesn't have a RowDblClick event
-		public virtual ArtistViewModel CurrentTrack { get; set; }
+		public virtual AlbumViewModel CurrentItem { get; set; }
 		public virtual bool IsLoading
 		{
 			get;
@@ -27,7 +27,7 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected AlbumTreeViewModel()
 		{
 			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () => {
-				ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Artists);
+				ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Albums);
 			});
 		}
 
@@ -42,14 +42,14 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
 
 
-		public void EditTrack(AlbumViewModel album)
+		public void EditItem(AlbumViewModel item)
 		{
-			var clone = album.Clone();
+			var editItem = item.Clone();
 			if (DialogService.ShowDialog(
-				MessageButton.OKCancel, "Edit Artist", "ArtistView", clone) == MessageResult.OK)
+				MessageButton.OKCancel, "Edit Artist", "ArtistView", editItem) == MessageResult.OK)
 			{
-				album.Assign(clone);
-				DataAccess.PersistAlbum(album);
+				item.Assign(editItem);
+				DataAccess.PersistAlbum(item);
 			}
 		}
 
@@ -62,7 +62,7 @@ namespace DXMVVMSampleWPF.ViewModels
 				var results = new ObservableCollection<AlbumViewModel>(DataAccess.GetAlbumViewModelList());
 				// Update on UI Thread
 				((IDispatcherService)state).BeginInvoke(() => {
-					Albums = results;
+					Items = results;
 					IsLoading = false;
 				});
 

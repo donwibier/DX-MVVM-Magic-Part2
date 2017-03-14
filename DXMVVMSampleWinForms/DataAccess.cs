@@ -12,6 +12,17 @@ namespace DXMVVMSampleWinForms
 		public int Key { get; set; }
 		public string Value { get; set; }
 	}
+	public enum NavigationKey
+	{
+		Tracks,
+		Artists,
+		Albums
+	}
+	public static class Regions
+	{
+		public static string Navigation { get { return "NavigationRegion"; } }
+		public static string Content { get { return "ContentRegion"; } }
+	}
 	public class DataAccess
 	{
 		public static IEnumerable<TrackViewModel> GetTrackViewModelList()

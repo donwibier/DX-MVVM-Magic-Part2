@@ -10,14 +10,14 @@ namespace DXMVVMSampleWinForms.ViewModels
 	[POCOViewModel]
 	public class TrackListViewModel
 	{
-		public virtual ObservableCollection<TrackViewModel> Tracks
+		public virtual ObservableCollection<TrackViewModel> Items
 		{
 			get;
 			/* We only want to set this through the ViewModel code */
 			protected set;
 		}
 		//CurrentTrack is only needed for Winforms app since the WinForms Grid doesn't have a RowDblClick event
-		public virtual TrackViewModel CurrentTrack { get; set; }
+		public virtual TrackViewModel CurrentItem { get; set; }
 		public virtual bool IsLoading
 		{
 			get;
@@ -26,6 +26,9 @@ namespace DXMVVMSampleWinForms.ViewModels
 
 		protected TrackListViewModel()
 		{
+			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () => {
+				ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Tracks);
+			});
 		}
 
 		public static TrackListViewModel Create()
@@ -39,14 +42,14 @@ namespace DXMVVMSampleWinForms.ViewModels
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
 
 
-		public void EditTrack(TrackViewModel track)
+		public void EditItem(TrackViewModel item)
 		{
-			var trackClone = track.Clone();
+			var editItem = item.Clone();
 			if (DialogService.ShowDialog(
-				MessageButton.OKCancel, "Edit Track", "TrackView", trackClone) == MessageResult.OK)
+				MessageButton.OKCancel, "Edit Track", "TrackView", editItem) == MessageResult.OK)
 			{
-				track.Assign(trackClone);
-				DataAccess.PersistTrack(track);
+				item.Assign(editItem);
+				DataAccess.PersistTrack(item);
 			}
 		}
 
@@ -59,10 +62,10 @@ namespace DXMVVMSampleWinForms.ViewModels
 				var results = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList());
 				// Update on UI Thread
 				((IDispatcherService)state).BeginInvoke(() => {
-					Tracks = results;		  
+					Items = results;
 					IsLoading = false;
 				});
-				
+
 			}, DispatcherService);
 		}
 	}

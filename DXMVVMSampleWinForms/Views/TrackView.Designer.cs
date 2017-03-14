@@ -86,6 +86,7 @@
 			// 
 			// txtComposer
 			// 
+			this.txtComposer.EnterMoveNextControl = true;
 			this.txtComposer.Location = new System.Drawing.Point(63, 60);
 			this.txtComposer.Name = "txtComposer";
 			this.txtComposer.Size = new System.Drawing.Size(530, 20);
@@ -109,9 +110,12 @@
 			// 
 			// cbxAlbum
 			// 
+			this.cbxAlbum.EnterMoveNextControl = true;
 			this.cbxAlbum.Location = new System.Drawing.Point(63, 36);
 			this.cbxAlbum.MenuManager = this.barManager1;
 			this.cbxAlbum.Name = "cbxAlbum";
+			this.cbxAlbum.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.DropDown)});
 			this.cbxAlbum.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", 200, "Album")});
 			this.cbxAlbum.Properties.DisplayMember = "Value";
@@ -186,6 +190,7 @@
 			// 
 			// txtName
 			// 
+			this.txtName.EnterMoveNextControl = true;
 			this.txtName.Location = new System.Drawing.Point(63, 12);
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(530, 20);
@@ -199,6 +204,7 @@
             0,
             0,
             0});
+			this.spnLength.EnterMoveNextControl = true;
 			this.spnLength.Location = new System.Drawing.Point(63, 84);
 			this.spnLength.Name = "spnLength";
 			this.spnLength.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -213,6 +219,7 @@
             0,
             0,
             0});
+			this.spnBytes.EnterMoveNextControl = true;
 			this.spnBytes.Location = new System.Drawing.Point(63, 108);
 			this.spnBytes.Name = "spnBytes";
 			this.spnBytes.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;

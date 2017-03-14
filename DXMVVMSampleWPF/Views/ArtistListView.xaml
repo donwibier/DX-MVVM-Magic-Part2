@@ -5,7 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
 			 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
-		xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 		
+			 xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 		
 			 xmlns:ViewModels="clr-namespace:DXMVVMSampleWPF.ViewModels"
 			 mc:Ignorable="d"
 			 DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ArtistListViewModel}"
@@ -25,7 +25,7 @@
 	<Grid>
 		<dxg:GridControl x:Name="grid" AutoGenerateColumns="AddNew" 
 						 EnableSmartColumnsGeneration="True" 
-						 ItemsSource="{Binding Artists}"
+						 ItemsSource="{Binding Items}"
 						 ShowLoadingPanel="{Binding IsLoading}">
 			<dxg:GridControl.View>
 				<dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False">

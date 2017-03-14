@@ -46,13 +46,16 @@
 			this.ClientSize = new System.Drawing.Size(811, 599);
 			this.Controls.Add(this.trackListView1);
 			this.Name = "MainWindow";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "MainWindow";
 			this.ResumeLayout(false);
 
 		}
 
+		private Views.TrackListView trackListView1;
+
 		#endregion
 
-		private Views.TrackListView trackListView1;
+		//private Views.TrackListView trackListView1;
 	}
 }
