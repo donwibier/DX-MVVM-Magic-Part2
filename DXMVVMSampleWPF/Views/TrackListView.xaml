@@ -31,7 +31,7 @@
 			<dxg:GridControl.View>
 				<dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" AllowEditing="False">
 					<dxmvvm:Interaction.Behaviors>
-						<dxmvvm:EventToCommand EventName="RowDoubleClick" Command="{Binding EditTrackCommand}" 
+						<dxmvvm:EventToCommand EventName="RowDoubleClick" Command="{Binding EditItemCommand}" 
 											   CommandParameter="{Binding CurrentItem, ElementName=grid}"/>
 					</dxmvvm:Interaction.Behaviors>
 					

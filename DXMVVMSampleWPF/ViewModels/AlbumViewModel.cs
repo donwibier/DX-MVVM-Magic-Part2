@@ -4,6 +4,7 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace DXMVVMSampleWPF.ViewModels
 {
@@ -13,11 +14,12 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected AlbumViewModel()
 		{
 		}
-		protected AlbumViewModel(int? albumId, string name, int trackcount)
+		protected AlbumViewModel(int? albumId, string name, IEnumerable<TrackViewModel> tracks)
 		{
 			this.AlbumId = albumId;
 			this.Name = name;
-			this.TrackCount = trackcount;
+			
+			this.Items = (tracks == null) ? new ObservableCollection<TrackViewModel>() :  new ObservableCollection<TrackViewModel>(tracks);
 
 			//calculated fields here
 
@@ -26,14 +28,12 @@ namespace DXMVVMSampleWPF.ViewModels
 
 		public static AlbumViewModel Create()
 		{
-			var t = new TrackList()[15];
-
-			return ViewModelSource.Create(() => new AlbumViewModel(-1, "Don Wibier", 0));
+			return ViewModelSource.Create(() => new AlbumViewModel(-1, "No Name", null));
 		}
 
-		public static AlbumViewModel Create(int? albumId, string name, int trackcount)
+		public static AlbumViewModel Create(int? albumId, string name, IEnumerable<TrackViewModel> tracks)
 		{
-			return ViewModelSource.Create(() => new AlbumViewModel(albumId, name, trackcount));
+			return ViewModelSource.Create(() => new AlbumViewModel(albumId, name, tracks));
 		}
 		public bool CanResetName()
 		{
@@ -57,32 +57,18 @@ namespace DXMVVMSampleWPF.ViewModels
 		public int? AlbumId { get; set; }
 		public virtual string Name { get; set; }
 
-		public virtual int TrackCount { get; set; }
-
-		private ObservableCollection<TrackViewModel> _Items = null;
-		public virtual ObservableCollection<TrackViewModel> Items
-		{
-			get
-			{
-				if (_Items == null)
-				{
-					_Items = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList(this.AlbumId ?? 0));
-				}
-				return _Items;
-			}
-			set { _Items = value; }
-		}
+		public virtual ObservableCollection<TrackViewModel> Items { get; set; }
 
 		public AlbumViewModel Clone()
 		{
-			return AlbumViewModel.Create(AlbumId, Name, TrackCount);
+			return AlbumViewModel.Create(AlbumId, Name, Items);
 		}
 
 		public void Assign(AlbumViewModel source)
 		{
 			this.AlbumId = source.AlbumId;
 			this.Name = source.Name;
-			this.TrackCount = source.TrackCount;
+			
 			this.Items = source.Items;
 		}
 	}

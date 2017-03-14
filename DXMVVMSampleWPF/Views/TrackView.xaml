@@ -9,6 +9,7 @@
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
 			 xmlns:ViewModels="clr-namespace:DXMVVMSampleWPF.ViewModels"
+			 xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
 			 x:Class="DXMVVMSampleWPF.Views.TrackView"
              mc:Ignorable="d"
              DataContext="{dxmvvm:ViewModelSource Type={x:Type ViewModels:TrackViewModel}}"
@@ -29,7 +30,10 @@
 						<dxe:TextEdit Text="{Binding Name}"/>
 					</dxlc:LayoutItem>
 					<dxlc:LayoutItem Label="Album">
-						<dxe:TextEdit Text="{Binding AlbumId}"/>
+						<!--<dxe:TextEdit Text="{Binding AlbumId}"/>-->
+
+						<dxg:LookUpEdit EditValue="{Binding AlbumId}" ItemsSource="{Binding AlbumLookupData}" DisplayMember="Value" ValueMember="Key"/>
+
 					</dxlc:LayoutItem>
 					<dxlc:LayoutItem Label="Composer">
 						<dxe:TextEdit Text="{Binding Composer}"/>

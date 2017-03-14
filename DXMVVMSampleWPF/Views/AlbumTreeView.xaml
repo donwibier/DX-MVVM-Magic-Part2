@@ -33,8 +33,11 @@
 						 EnableSmartColumnsGeneration="True" 
 						 ItemsSource="{Binding Items}"					
 						 ShowLoadingPanel="{Binding IsLoading}">
+			<dxmvvm:Interaction.Behaviors>
+				<dxmvvm:EventToCommand EventName="Nod"/>
+			</dxmvvm:Interaction.Behaviors>
 			<dxg:TreeListControl.View>
-				<dxg:TreeListView x:Name="view" TreeDerivationMode="ChildNodesSelector"
+				<dxg:TreeListView x:Name="view" TreeDerivationMode="ChildNodesSelector" 
 								  ChildNodesPath="Items">
 				</dxg:TreeListView>
 			</dxg:TreeListControl.View>

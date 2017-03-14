@@ -63,6 +63,7 @@ namespace DXMVVMSampleWPF
 		//		data.Add(pTrack);
 		//}
 
+
 		public static IEnumerable<TrackViewModel> GetTrackViewModelList()
 		{
 			using (var ctx = new ChinookContext())
@@ -73,34 +74,8 @@ namespace DXMVVMSampleWPF
 									   select new LookupItem() { Key = media.MediaTypeId, Value = media.Name }).ToList();
 				var genreLookupData = (from genre in ctx.Genre
 									   select new LookupItem { Key = genre.GenreId, Value = genre.Name }).ToList();
-
+				
 				foreach (var track in ctx.Track)
-					yield return TrackViewModel.Create(track.TrackId,
-										 track.Name,
-										 track.AlbumId,
-										 track.MediaTypeId,
-										 track.GenreId,
-										 track.Composer,
-										 track.Milliseconds,
-										 track.Bytes,
-										 albumLookupData,
-										 mediaLookupData,
-										 genreLookupData);
-			}
-		}
-
-		public static IEnumerable<TrackViewModel> GetTrackViewModelList(int albumid)
-		{
-			using (var ctx = new ChinookContext())
-			{
-				var albumLookupData = (from album in ctx.Album
-									   select new LookupItem { Key = album.AlbumId, Value = album.Title }).ToList();
-				var mediaLookupData = (from media in ctx.MediaType
-									   select new LookupItem() { Key = media.MediaTypeId, Value = media.Name }).ToList();
-				var genreLookupData = (from genre in ctx.Genre
-									   select new LookupItem { Key = genre.GenreId, Value = genre.Name }).ToList();
-
-				foreach (var track in ctx.Track.Where(x => x.AlbumId == albumid))
 					yield return TrackViewModel.Create(track.TrackId,
 										 track.Name,
 										 track.AlbumId,
@@ -158,8 +133,21 @@ namespace DXMVVMSampleWPF
 		{
 			using (var ctx = new ChinookContext())
 			{
+				List<TrackViewModel> tracks = new List<TrackViewModel>();
+				//load tracks in memory 
+				foreach (var track in ctx.Track)
+					tracks.Add(TrackViewModel.Create(track.TrackId,
+										 track.Name,
+										 track.AlbumId,
+										 track.MediaTypeId,
+										 track.GenreId,
+										 track.Composer,
+										 track.Milliseconds,
+										 track.Bytes));
 				foreach (var album in ctx.Album)
-					yield return AlbumViewModel.Create(album.ArtistId, album.Title, album.Track.Count());
+				{
+					yield return AlbumViewModel.Create(album.AlbumId, album.Title, tracks.FindAll(x => x.AlbumId == album.AlbumId));
+				}
 			}
 		}
 		public static void PersistAlbum(AlbumViewModel album)
@@ -175,15 +163,5 @@ namespace DXMVVMSampleWPF
 			}
 		}
 
-	}
-
-	public class CustomChildrenSelector : IChildNodesSelector
-	{
-		public IEnumerable SelectChildren(object item)
-		{
-			if (item is AlbumViewModel)
-				return (item as AlbumViewModel).Items;
-			return null;
-		}
 	}
 }
