@@ -8,10 +8,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using DevExpress.Utils.MVVM.Services;
-using DXMVVMSampleWinForms.ViewModels;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DXMVVMSampleWinForms.ViewModels;
+using DevExpress.Utils.MVVM.Services;
 
 namespace DXMVVMSampleWinForms.Views
 {
@@ -29,21 +29,24 @@ namespace DXMVVMSampleWinForms.Views
 			mvvmContext1.RegisterService(DialogService.CreateXtraDialogService(this, "Details"));
 			mvvmContext1.RegisterService(DispatcherService.Create());
 
-			var mvvm = mvvmContext1.OfType<ArtistListViewModel>();
+			var mvvm = mvvmContext1.OfType<TrackListViewModel>();
 
 			mvvm.SetBinding(gridView1, x => x.LoadingPanelVisible, x => x.IsLoading);
 
 			mvvm.WithEvent<EventArgs>(this, "Load").EventToCommand(x => x.LoadTracks());
 
 			mvvm.WithEvent<ColumnView, FocusedRowObjectChangedEventArgs>(gridView1, "FocusedRowObjectChanged")
-				.SetBinding(x => x.CurrentTrack,
-					args => args.Row as ArtistViewModel,
+				.SetBinding(x => x.CurrentItem,
+					args => args.Row as TrackViewModel,
 					(gView, track) => gView.FocusedRowHandle = gView.FindRow(track));
 
 			mvvm.WithEvent<RowClickEventArgs>(gridView1, "RowClick")
 			   .EventToCommand(
-				   x => x.EditTrack(null), x => x.CurrentTrack,
+				   x => x.EditItem(null), x => x.CurrentItem,
 				   args => (args.Clicks == 2) && (args.Button == MouseButtons.Left));
+
+			mvvmContext1.RegisterService(new CustomReportService(gridView1));
+			mvvm.BindCommand(barButtonItem1, x => x.ShowReport());
 		}
 	}
 }

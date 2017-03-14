@@ -44,6 +44,9 @@
     <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v16.2.Service, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -68,6 +71,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomPrintService.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Data\TrackInfo.cs" />
     <Compile Include="Data\TrackList.cs" />
@@ -90,8 +94,22 @@
     <Compile Include="Models\Track.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ArtistListViewModel.cs" />
     <Compile Include="ViewModels\TrackListViewModel.cs" />
+    <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />
+    <Compile Include="Views\ArtistListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ArtistListView.Designer.cs">
+      <DependentUpon>ArtistListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArtistView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ArtistView.Designer.cs">
+      <DependentUpon>ArtistView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrackListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +135,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\ArtistListView.resx">
+      <DependentUpon>ArtistListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ArtistView.resx">
+      <DependentUpon>ArtistView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\TrackListView.resx">
       <DependentUpon>TrackListView.cs</DependentUpon>
     </EmbeddedResource>

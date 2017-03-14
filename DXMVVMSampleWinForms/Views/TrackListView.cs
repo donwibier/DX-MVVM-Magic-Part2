@@ -44,6 +44,9 @@ namespace DXMVVMSampleWinForms.Views
 			   .EventToCommand(
 				   x => x.EditItem(null), x => x.CurrentItem,
 				   args => (args.Clicks == 2) && (args.Button == MouseButtons.Left));
+
+			mvvmContext1.RegisterService(new CustomReportService(gridView1));
+			mvvm.BindCommand(barButtonItem1, x => x.ShowReport());
 		}
 	}
 }

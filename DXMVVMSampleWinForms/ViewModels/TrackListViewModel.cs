@@ -41,6 +41,14 @@ namespace DXMVVMSampleWinForms.ViewModels
 		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
 
+		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
+		protected virtual ICustomReportService CustomReportService { get { return null; } }
+
+		public void ShowReport()
+		{
+			var rs = this.GetService<ICustomReportService>();
+			rs.ShowReport();
+		}
 
 		public void EditItem(TrackViewModel item)
 		{

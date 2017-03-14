@@ -26,9 +26,11 @@ namespace DXMVVMSampleWPF.ViewModels
 
 		protected ArtistListViewModel()
 		{
+#if(WPF)
 			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () => {
 					ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Artists);
 				});
+#endif
 		}
 
 		public static ArtistListViewModel Create()

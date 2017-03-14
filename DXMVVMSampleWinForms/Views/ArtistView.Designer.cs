@@ -56,7 +56,7 @@
 			this.layoutControl1.Location = new System.Drawing.Point(0, 0);
 			this.layoutControl1.Name = "layoutControl1";
 			this.layoutControl1.Root = this.layoutControlGroup1;
-			this.layoutControl1.Size = new System.Drawing.Size(709, 561);
+			this.layoutControl1.Size = new System.Drawing.Size(499, 357);
 			this.layoutControl1.TabIndex = 0;
 			this.layoutControl1.Text = "layoutControl1";
 			// 
@@ -69,14 +69,14 @@
             this.emptySpaceItem1});
 			this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroup1.Name = "layoutControlGroup1";
-			this.layoutControlGroup1.Size = new System.Drawing.Size(709, 561);
+			this.layoutControlGroup1.Size = new System.Drawing.Size(499, 357);
 			this.layoutControlGroup1.TextVisible = false;
 			// 
 			// txtName
 			// 
 			this.txtName.Location = new System.Drawing.Point(43, 12);
 			this.txtName.Name = "txtName";
-			this.txtName.Size = new System.Drawing.Size(654, 20);
+			this.txtName.Size = new System.Drawing.Size(444, 20);
 			this.txtName.StyleController = this.layoutControl1;
 			this.txtName.TabIndex = 4;
 			// 
@@ -85,7 +85,7 @@
 			this.layoutControlItem1.Control = this.txtName;
 			this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlItem1.Name = "layoutControlItem1";
-			this.layoutControlItem1.Size = new System.Drawing.Size(689, 24);
+			this.layoutControlItem1.Size = new System.Drawing.Size(479, 24);
 			this.layoutControlItem1.Text = "Name";
 			this.layoutControlItem1.TextSize = new System.Drawing.Size(27, 13);
 			// 
@@ -94,7 +94,7 @@
 			this.emptySpaceItem1.AllowHotTrack = false;
 			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 24);
 			this.emptySpaceItem1.Name = "emptySpaceItem1";
-			this.emptySpaceItem1.Size = new System.Drawing.Size(689, 517);
+			this.emptySpaceItem1.Size = new System.Drawing.Size(479, 313);
 			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// ArtistView
@@ -103,7 +103,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.layoutControl1);
 			this.Name = "ArtistView";
-			this.Size = new System.Drawing.Size(709, 561);
+			this.Size = new System.Drawing.Size(499, 357);
 			((System.ComponentModel.ISupportInitialize)(this.mvvmContext1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
 			this.layoutControl1.ResumeLayout(false);
@@ -114,6 +114,7 @@
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
 		private DevExpress.Utils.MVVM.MVVMContext mvvmContext1;

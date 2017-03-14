@@ -26,9 +26,11 @@ namespace DXMVVMSampleWPF.ViewModels
 
 		protected AlbumTreeViewModel()
 		{
+#if(WPF)
 			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () => {
 				ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Albums);
 			});
+#endif
 		}
 
 		public static AlbumTreeViewModel Create()

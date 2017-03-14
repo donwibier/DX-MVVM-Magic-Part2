@@ -30,7 +30,8 @@ namespace DXMVVMSampleWinForms.Views
 
 			var f = mvvmContext1.OfType<ArtistViewModel>();
 
-			f.SetBinding(txtName, x => x.EditValue, x => x.Name);
+			f.SetBinding(txtName, x => x.EditValue, x => x.Name);		
+		
 		}
 	}
 }

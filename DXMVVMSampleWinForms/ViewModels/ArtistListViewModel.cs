@@ -1,41 +1,39 @@
-﻿using DevExpress.Mvvm.DataAnnotations;
+﻿using System;
+using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using DevExpress.Xpf.Reports.UserDesigner.Extensions;
 
-namespace DXMVVMSampleWPF.ViewModels
+namespace DXMVVMSampleWinForms.ViewModels
 {
 	[POCOViewModel]
-	public class TrackListViewModel
+	public class ArtistListViewModel
 	{
-		public virtual ObservableCollection<TrackViewModel> Items
+		public virtual ObservableCollection<ArtistViewModel> Items
 		{
 			get;
 			/* We only want to set this through the ViewModel code */
 			protected set;
 		}
 		//CurrentTrack is only needed for Winforms app since the WinForms Grid doesn't have a RowDblClick event
-		public virtual TrackViewModel CurrentItem { get; set; }
+		public virtual ArtistViewModel CurrentItem { get; set; }
 		public virtual bool IsLoading
 		{
 			get;
 			protected set;
 		}
 
-		protected TrackListViewModel()
+		protected ArtistListViewModel()
 		{
-#if(WPF)
 			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () => {
-					ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Tracks);
-				});
-#endif
+				ViewInjectionManager.Default.Navigate(Regions.Navigation, NavigationKey.Tracks);
+			});
 		}
 
-		public static TrackListViewModel Create()
+		public static ArtistListViewModel Create()
 		{
-			return ViewModelSource.Create(() => new TrackListViewModel());
+			return ViewModelSource.Create(() => new ArtistListViewModel());
 		}
 
 		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
@@ -44,17 +42,22 @@ namespace DXMVVMSampleWPF.ViewModels
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
 
 		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
-		protected virtual IReportManagerService ReportManagerService { get { return null; } }
+		protected virtual ICustomReportService CustomReportService { get { return null; } }
 
+		public void ShowReport()
+		{
+			var rs = this.GetService<ICustomReportService>();
+			rs.ShowReport();
+		}
 
-		public void EditItem(TrackViewModel item)
+		public void EditItem(ArtistViewModel item)
 		{
 			var editItem = item.Clone();
 			if (DialogService.ShowDialog(
-				MessageButton.OKCancel, "Edit Track", "TrackView", editItem) == MessageResult.OK)
+				MessageButton.OKCancel, "Edit Artist", "ArtistView", editItem) == MessageResult.OK)
 			{
 				item.Assign(editItem);
-				DataAccess.PersistTrack(item);
+				DataAccess.PersistArtist(item);
 			}
 		}
 
@@ -64,7 +67,7 @@ namespace DXMVVMSampleWPF.ViewModels
 
 			return Task.Factory.StartNew((state) =>
 			{
-				var results = new ObservableCollection<TrackViewModel>(DataAccess.GetTrackViewModelList());
+				var results = new ObservableCollection<ArtistViewModel>(DataAccess.GetArtistViewModelList());
 				// Update on UI Thread
 				((IDispatcherService)state).BeginInvoke(() => {
 					Items = results;

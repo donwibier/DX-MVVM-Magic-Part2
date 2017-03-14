@@ -51,6 +51,7 @@ namespace DXMVVMSampleWinForms
 			}
 		}
 
+
 		public static void PersistTrack(TrackViewModel track)
 		{
 			using (var ctx = new ChinookContext())
@@ -65,6 +66,26 @@ namespace DXMVVMSampleWinForms
 				pTrack.Composer = track.Composer;
 				pTrack.Milliseconds = track.Milliseconds;
 				pTrack.Bytes = track.Bytes;
+				ctx.SaveChanges();
+			}
+		}
+		public static IEnumerable<ArtistViewModel> GetArtistViewModelList()
+		{
+			using (var ctx = new ChinookContext())
+			{
+				foreach (var artist in ctx.Artist)
+					yield return ArtistViewModel.Create(artist.ArtistId, artist.Name);
+			}
+		}
+		public static void PersistArtist(ArtistViewModel artist)
+		{
+			using (var ctx = new ChinookContext())
+			{
+				Artist pArtist = artist.ArtistId.HasValue ?
+					ctx.Artist.First(t => t.ArtistId == artist.ArtistId) :
+					new Artist();
+
+				pArtist.Name = artist.Name;
 				ctx.SaveChanges();
 			}
 		}

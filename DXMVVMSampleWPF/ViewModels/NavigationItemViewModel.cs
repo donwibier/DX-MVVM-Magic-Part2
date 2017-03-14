@@ -15,12 +15,12 @@ namespace DXMVVMSampleWPF.ViewModels
 		{
 			Title = title;
 			NavigationKey = navigationKey;
-
+#if(WPF)
 			ViewInjectionManager.Default.RegisterNavigatedEventHandler(this, () =>
 			{
 				ViewInjectionManager.Default.Navigate(Regions.Content, this.NavigationKey);
 			});
-
+#endif
 		}
 		public static NavigationItemViewModel Create(string title, NavigationKey navigationKey)
 		{
