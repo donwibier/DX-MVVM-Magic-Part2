@@ -3,6 +3,7 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using DevExpress.Xpf.Reports.UserDesigner.Extensions;
 
 namespace DXMVVMSampleWPF.ViewModels
 {
@@ -39,6 +40,9 @@ namespace DXMVVMSampleWPF.ViewModels
 		public virtual IDialogService DialogService { get { return null; } }
 		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
 		protected virtual IDispatcherService DispatcherService { get { return null; } }
+
+		[ServiceProperty(SearchMode = ServiceSearchMode.PreferParents)]
+		protected virtual IReportManagerService ReportManagerService { get { return null; } }
 
 
 		public void EditItem(TrackViewModel item)

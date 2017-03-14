@@ -1,12 +1,13 @@
-﻿<UserControl
+﻿<UserControl xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
 			 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
-	 xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 		
-	xmlns:ViewModels="clr-namespace:DXMVVMSampleWPF.ViewModels"
+			 xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+			 xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 		
+			 xmlns:ViewModels="clr-namespace:DXMVVMSampleWPF.ViewModels"
 			x:Class="DXMVVMSampleWPF.Views.TrackListView"
 			 mc:Ignorable="d"
 			 DataContext="{dxmvvm:ViewModelSource Type={x:Type ViewModels:TrackListViewModel}}"
@@ -23,7 +24,16 @@
 			</dx:DialogService.DialogStyle>
 		</dx:DialogService>
 	</dxmvvm:Interaction.Behaviors>
-	<Grid>
+	
+		<DockPanel>
+		<dxb:ToolBarControl Caption="Edit" DockPanel.Dock="Top">
+			<dxb:BarSplitButtonItem Content="Report">
+				<dxmvvm:Interaction.Behaviors>
+					<dxrudex:ReportManagerBehavior Service="{Binding ElementName=ReportService}" />
+				</dxmvvm:Interaction.Behaviors>
+			</dxb:BarSplitButtonItem>
+		</dxb:ToolBarControl>
+
 		<dxg:GridControl x:Name="grid" AutoGenerateColumns="AddNew" 
 						 EnableSmartColumnsGeneration="True" 
 						 ItemsSource="{Binding Items}"
@@ -33,10 +43,12 @@
 					<dxmvvm:Interaction.Behaviors>
 						<dxmvvm:EventToCommand EventName="RowDoubleClick" Command="{Binding EditItemCommand}" 
 											   CommandParameter="{Binding CurrentItem, ElementName=grid}"/>
+						<dxrudex:GridReportManagerService x:Name="ReportService" >
+						</dxrudex:GridReportManagerService>
 					</dxmvvm:Interaction.Behaviors>
-					
+
 				</dxg:TableView>
 			</dxg:GridControl.View>
 		</dxg:GridControl>
-	</Grid>
+	</DockPanel>
 </UserControl>
