@@ -47,6 +47,10 @@ namespace DXMVVMSampleWinForms.Views
 
 			mvvmContext1.RegisterService(new CustomReportService(gridView1));
 			mvvm.BindCommand(barButtonItem1, x => x.ShowReport());
+
+
+
+			mvvm.SetBinding(repositoryItemLookUpEditAlbum, e => e.DataSource, x => x.CurrentItem.AlbumLookupData );
 		}
 	}
 }

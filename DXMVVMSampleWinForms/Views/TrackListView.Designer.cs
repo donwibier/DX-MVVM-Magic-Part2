@@ -41,16 +41,18 @@
 			this.gridColumnMilliseconds = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnBytes = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+			this.bar2 = new DevExpress.XtraBars.Bar();
+			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.bar2 = new DevExpress.XtraBars.Bar();
-			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+			this.repositoryItemLookUpEditAlbum = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
 			((System.ComponentModel.ISupportInitialize)(this.mvvmContext1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditAlbum)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// mvvmContext1
@@ -66,6 +68,8 @@
 			this.gridControl1.Location = new System.Drawing.Point(0, 22);
 			this.gridControl1.MainView = this.gridView1;
 			this.gridControl1.Name = "gridControl1";
+			this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemLookUpEditAlbum});
 			this.gridControl1.Size = new System.Drawing.Size(684, 406);
 			this.gridControl1.TabIndex = 0;
 			this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -105,6 +109,7 @@
 			// gridColumnAlbum
 			// 
 			this.gridColumnAlbum.Caption = "Album";
+			this.gridColumnAlbum.ColumnEdit = this.repositoryItemLookUpEditAlbum;
 			this.gridColumnAlbum.FieldName = "AlbumId";
 			this.gridColumnAlbum.Name = "gridColumnAlbum";
 			this.gridColumnAlbum.Visible = true;
@@ -164,6 +169,24 @@
 			this.barManager1.MainMenu = this.bar2;
 			this.barManager1.MaxItemId = 1;
 			// 
+			// bar2
+			// 
+			this.bar2.BarName = "Main menu";
+			this.bar2.DockCol = 0;
+			this.bar2.DockRow = 0;
+			this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+			this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
+			this.bar2.OptionsBar.MultiLine = true;
+			this.bar2.OptionsBar.UseWholeRow = true;
+			this.bar2.Text = "Main menu";
+			// 
+			// barButtonItem1
+			// 
+			this.barButtonItem1.Caption = "Show Report";
+			this.barButtonItem1.Id = 0;
+			this.barButtonItem1.Name = "barButtonItem1";
+			// 
 			// barDockControlTop
 			// 
 			this.barDockControlTop.CausesValidation = false;
@@ -196,22 +219,17 @@
 			this.barDockControlRight.Manager = this.barManager1;
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 406);
 			// 
-			// bar2
+			// repositoryItemLookUpEditAlbum
 			// 
-			this.bar2.BarName = "Main menu";
-			this.bar2.DockCol = 0;
-			this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-			this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
-			this.bar2.OptionsBar.MultiLine = true;
-			this.bar2.OptionsBar.UseWholeRow = true;
-			this.bar2.Text = "Main menu";
-			// 
-			// barButtonItem1
-			// 
-			this.barButtonItem1.Caption = "Show Report";
-			this.barButtonItem1.Id = 0;
-			this.barButtonItem1.Name = "barButtonItem1";
+			this.repositoryItemLookUpEditAlbum.AutoHeight = false;
+			this.repositoryItemLookUpEditAlbum.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemLookUpEditAlbum.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Album Name")});
+			this.repositoryItemLookUpEditAlbum.DisplayMember = "Value";
+			this.repositoryItemLookUpEditAlbum.KeyMember = "AlbumId";
+			this.repositoryItemLookUpEditAlbum.Name = "repositoryItemLookUpEditAlbum";
+			this.repositoryItemLookUpEditAlbum.ValueMember = "Key";
 			// 
 			// TrackListView
 			// 
@@ -228,6 +246,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditAlbum)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -252,5 +271,6 @@
 		private DevExpress.XtraBars.BarDockControl barDockControlTop;
 		private DevExpress.XtraBars.BarDockControl barDockControlBottom;
 		private DevExpress.XtraBars.BarDockControl barDockControlRight;
+		private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditAlbum;
 	}
 }
